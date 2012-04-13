@@ -131,8 +131,7 @@ yourself.
 To do that, you can ask them in person, or you can put something in one of
 their inboxes.
 
-If the act of delegating will take more than two minutes, you should defer the
-action of delegating this action.
+If the act of delegating will take more than two minutes, you should defer delegating this action.
 
 When you delegate, you should also add an item to a delegated actions list.
 
@@ -263,7 +262,7 @@ todo.sh script.
 I should probably expand on that format here, but linking to the docs_ is
 pretty easy.
 
-The key thing about the format is intuitively obvious: a line corresponds to an
+The key thing about the format is intuitively obvious: a line specifies an
 action.
 
 Whenever you create an action file, it should be symlinked from the Actions
@@ -335,5 +334,5 @@ Current projects
 Implement this any way you like. It's there for you.
 
 A directory with symlinks to action directories at ~/actions/current would work
-just fine, I think, and might be amenable to crafting more of those custom
-tools I hear so much about.
+just fine, and might be useful in crafting those custom tools I hear so much
+about.
