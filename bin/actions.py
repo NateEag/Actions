@@ -3,6 +3,7 @@
 """A program to help manage action lists."""
 
 # Standard library imports.
+import ConfigParser
 import os
 import sys
 
@@ -15,7 +16,7 @@ CONFIG_PATH = '~/.actions'
 app = cmdline.App()
 
 @app.command
-def setup(actions_dir='~'):
+def setup(actions_dir='~/actions'):
     """Set up the current user's environment to use this command.
 
     If the config file exists, no changes are made.
@@ -33,9 +34,13 @@ def setup(actions_dir='~'):
 
         os.mkdir(actions_dir)
 
-    # DEBUG What format should this file be in? This is basically .ini...
+    config = ConfigParser.ConfigParser()
+
+    config.add_section('core')
+    config.set('core', 'actions_dir', actions_dir)
+
     f = open(config_path, 'w')
-    f.write('actions_dir=%s%s' % (actions_dir, os.linesep))
+    config.write(f)
     f.close()
 
 def main():
