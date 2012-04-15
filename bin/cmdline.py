@@ -139,8 +139,8 @@ class App(object):
         # GRIPE Add value parsing after this, once we know the basics are
         # ship-shape.
         args, varargs, varkw, defaults = inspect.getargspec(self.func)
-        num_opts = len(defaults)
-        num_args = len(args) - num_opts
+        num_opts = 0 if defaults is None else len(defaults)
+        num_args = 0 if args is None else len(args) - num_opts
 
         if len(self.args) != num_args:
             raise InvalidInput('%s takes %d arguments.' % (self.cmd, num_args))
@@ -152,7 +152,6 @@ class App(object):
             if key.replace('-', '_') not in opt_names:
                 raise InvalidInput('%s does not accept the %s option.' %
                                    (self.cmd, key))
-
 
     def run(self, argv=None):
         """Run the app with `argv` as command-line input.

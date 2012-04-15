@@ -290,7 +290,8 @@ An action directory holds action files specific to a project.
 They should have their own instances of the standard action files.
 
 Whenever an action directory is created, a symlink to it should be added to the
-Actions directory.
+Actions directory. There is a script to do that; see the Actions Directory for
+details.
 
 For collaborative projects that do not use this workflow, it may be
 convenient to create an action directory inside the project directory and
@@ -313,8 +314,11 @@ miscellaneous actions that do not merit a standalone project.
 To ensure it serves this purpose, when you create an action directory, symlink
 it from here. If for some reason you have standalone action lists, symlink it from here.
 
-That isn't hard to do, but there should be a command-line script that does it
-for you. This does not yet exist.
+That isn't hard to handle manually, but it's easier with a script. A very
+primitive one has been written, and lives at bin/actions.py. It doesn't even
+have a usage statement yet - the 'setup' command will set up your environment
+for using the script, while the 'mkdir' command will create an action directory
+that is symlinked from the actions directory.
 
 In theory, the actions directory should enable the creation of tools that rely
 on access to all actions.
