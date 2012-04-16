@@ -6,8 +6,8 @@ An approach to organizing life based on *Getting Things Done*, by
 David Allen.
 
 The point is to make your commitments explicit by tracking the actions that
-will fulfill them, rather than leaving implicit and floating vaguely through
-your head.
+will fulfill them, rather than leaving them implicit and floating vaguely
+through your head.
 
 For those of us who are not natural reductionists or have sloppy memories, this
 could be helpful.
