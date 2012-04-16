@@ -105,6 +105,8 @@ class App(object):
         cmd_name = func.__name__.replace('_', '-')
         self.commands[cmd_name] = func
 
+        return func
+
     def _parse_input(self, argv):
         """Set self.args, self.opts, and self.cmd based on `argv`."""
 
