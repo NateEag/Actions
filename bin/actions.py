@@ -12,7 +12,11 @@ import cmdline
 
 # Module constants.
 CONFIG_PATH = '~/.actions'
-default_action_files = ['todo.txt', 'delegated.txt', 'review.txt']
+default_action_files = ['goals.txt',
+                        'todo.txt',
+                        'done.txt',
+                        'delegated.txt',
+                        'review.txt']
 
 app = cmdline.App()
 
