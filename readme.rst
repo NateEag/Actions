@@ -6,8 +6,7 @@ An approach to organizing life based on *Getting Things Done*, by
 David Allen.
 
 The point is to make your commitments explicit by tracking the actions that
-will fulfill them, rather than leaving them implicit and floating vaguely
-through your head.
+will fulfill them, rather than trying to remember them all.
 
 For those of us who are not natural reductionists or have sloppy memories, this
 could be helpful.
@@ -270,14 +269,15 @@ directory.
 
 The standard action files are:
 
+* goals.txt, an outline of the project's goals.
 * todo.txt, a todo list.
 * delegated.txt, a delegated action list.
 * review.txt, a reviewbox.
-* done.txt, an optional list of finished actions.
+* done.txt, a list of finished actions.
 
-(Note: Emacs users may find the built-in uniquify library useful to make buffer
-names usefully distinct when editing action files for different projects. See
-section 16.7.1 of the Emacs manual for details.)
+(Note: Emacs users may find the built-in uniquify library helpful for making
+buffer names usefully distinct. See section 16.7.1 of the Emacs manual for
+details.)
 
 .. _docs: https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format
 
@@ -289,9 +289,9 @@ An action directory holds action files specific to a project.
 
 They should have their own instances of the standard action files.
 
-Whenever an action directory is created, a symlink to it should be added to the
-Actions directory. There is a script to do that; see the Actions Directory for
-details.
+Whenever an action directory is created, a corresponding directory should be
+added to ~/actions, and the new action dir's contents should be hardlinked
+from it. There is a script to do that; see the Actions Directory for details.
 
 For collaborative projects that do not use this workflow, it may be
 convenient to create an action directory inside the project directory and
@@ -305,20 +305,21 @@ Actions Directory
 The actions directory implements the project list described in the Definitions
 section.
 
-It exists to make whole-system reviews easier, while still letting project data
-stand alone.
+It exists to make whole-system reviews easier, while still letting project
+data stand alone.
 
 It also contains general versions of the standard action files, for
 miscellaneous actions that do not merit a standalone project.
 
-To ensure it serves this purpose, when you create an action directory, symlink
-it from here. If for some reason you have standalone action lists, symlink it from here.
+To ensure it serves this purpose, when you create an action directory, make a
+directory in here and hardlink the new action directory's contents from it. If
+for some reason you have standalone action lists, hardlink them from here.
 
 That isn't hard to handle manually, but it's easier with a script. A very
 primitive one has been written, and lives at bin/actions.py. It doesn't even
 have a usage statement yet - the 'setup' command will set up your environment
-for using the script, while the 'mkdir' command will create an action directory
-that is symlinked from the actions directory.
+for using the script, while the 'new' command will create an action directory
+and do the attendant housework.
 
 In theory, the actions directory should enable the creation of tools that rely
 on access to all actions.
@@ -331,6 +332,10 @@ Some such hypothetical tools:
 
 The expected location of the actions directory is ~/actions.
 
+Note: Emacs users may not know that by default, their editor will break
+hardlinks on every save. See the Emacs docs on `backup copying`_.
+
+.. _backup copying: http://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Copying.html
 
 Current projects
 ----------------

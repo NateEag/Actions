@@ -52,6 +52,9 @@ def setup(actions_dir='~/actions'):
 
 # GRIPE There should be a corresponding delete command, too, though I imagine
 # it would only rarely be used.
+# GRIPE `path` should probably have a default value of 'actions'. How can I
+# distinguish between 'optional arguments' and 'options'? Maybe arguments to
+# @app.command decorator?
 @app.command
 def new(path):
     """Create an action directory at `path`."""
@@ -68,10 +71,8 @@ def new(path):
         raise Exception('%s already exists.' % path)
 
     os.mkdir(path)
-    _symlink_from_actions(path)
-
-    # Create the standard action files.
     _mk_action_files(path)
+    _hardlink_action_files(path)
 
 def _mk_action_files(path):
     """Create default action files in `path`.
@@ -87,14 +88,18 @@ def _mk_action_files(path):
         f = open(os.path.join(path, filename), 'w')
         f.close()
 
-def _symlink_from_actions(path):
-    """Make a symlink to `path` from the main actions directory.
+def _hardlink_action_files(path):
+    """Hardlink action files in `path` from the main actions directory.
 
-    Note that every symlink in the actions directory will have
+    Creates a dir in the main actions dir to store the hardlinks in. The
+    directory's name is guaranteed to be unique within the main actions dir.
 
-    Dot-separated path fragments for symlink names are not a great way
-    to ensure uniqueness, but they seem better than nesting directories.
-    Improvements welcome.
+    The hardlink container is named with the minimum-needed dot-separated
+    components from `os.abspath(path)` to ensure a unique name.
+
+    This means if you move the dir at `path`, the container dir will
+    wind up with an out-of-date name. It'd be possible to synchronize
+    names on demand, if it proved useful.
 
     """
 
@@ -107,13 +112,19 @@ def _symlink_from_actions(path):
     path = os.path.abspath(path)
 
     unused_path = os.path.dirname(path)
-    symlink_name = os.path.basename(unused_path)
-    while os.path.exists(os.path.join(actions_dir, symlink_name)):
+    hardlink_name = os.path.basename(unused_path)
+    while os.path.exists(os.path.join(actions_dir, hardlink_name)):
         unused_path = os.path.dirname(unused_path)
-        symlink_name = os.path.basename(unused_path) + '.' + symlink_name
+        hardlink_name = os.path.basename(unused_path) + '.' + hardlink_name
 
-    symlink_path = os.path.join(actions_dir, symlink_name)
-    os.symlink(path, symlink_path)
+    hardlink_path = os.path.join(actions_dir, hardlink_name)
+    os.mkdir(hardlink_path)
+
+    # Make the actual hardlinks.
+    for filename in default_action_files:
+        source = os.path.join(path, filename)
+        target = os.path.join(hardlink_path, filename)
+        os.link(source, target)
 
 def main():
     """Run from command line."""
