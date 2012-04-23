@@ -258,13 +258,21 @@ Action File
 A text file containing a list of actions, formatted for use by Gina Trapani's
 todo.sh script.
 
-I should probably expand on that format here, but linking to the docs_ is
-pretty easy.
+A line specifies an action. The line may use the following metadata fields::
 
-The key thing about the format is intuitively obvious: a line specifies an
-action.
+    [priority ][creation-date] Action summary. [contexts]
 
-Whenever you create an action file, it should be symlinked from the Actions
+where the fields are formatted as follows::
+
+    priority: ([A-Z])
+    creation-date: YYYY-MM-DD
+    contexts: @context1 @context2 ...
+
+For further details, read the docs_. Since we store completed actions in their
+own file, and since each project gets its own files, the completion and
+project fields are not used.
+
+When you create an action file, you should hardlink it from the main Actions
 directory.
 
 The standard action files are:
