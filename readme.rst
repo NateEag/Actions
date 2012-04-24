@@ -11,8 +11,6 @@ will fulfill them, rather than trying to remember them all.
 For those of us who are not natural reductionists or have sloppy memories, this
 could be helpful.
 
-This is as yet untested - it may change drastically as I try it out.
-
 
 Definitions
 ===========
