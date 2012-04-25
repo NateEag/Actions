@@ -34,12 +34,22 @@ import sys
 class InvalidInput(Exception):
     """Indicates that invalid input was given.
 
-    self.value is a string explaining the problem with the input.
+    self.value is the invalid input, or None if no input was given.
 
     """
 
-    def __init__(self, value):
+    def __init__(self, value=None):
         self.value = value
+
+class UnknownCommand(InvalidInput):
+    """Indicates that an unknown command was given.
+
+    self.value is the command, or None if no command was given.
+
+    """
+
+# DEBUG There should be exceptions for invalid options, wrong number of args,
+# and any other command-specific errors.
 
 def parse_opts(inputs):
     """Return a tuple of (`args`, `opts`) constructed from `inputs`.
@@ -120,9 +130,10 @@ class App(object):
         if len(self.commands) > 0:
             # This program uses subcommands, and the first arg must therefore
             # be one.
-            # GRIPE Better error handling here would be just dandy.
+            # DEBUG Not all programs use subcommands, and we should not assume
+            # that they do.
             if len(args) < 1:
-                raise InvalidInput('You must enter a command.')
+                raise UnknownCommand()
 
             self.cmd = args[0]
             args = args[1:]
@@ -133,7 +144,7 @@ class App(object):
         if self.cmd not in self.commands:
             # GRIPE There should be more advanced error handling here.
             # Like printing a usage message if one is defined.
-            raise InvalidInput('"%s" is not a known command.' % self.cmd)
+            raise UnknownCommand(self.cmd)
 
         self.func = self.commands[self.cmd]
 
@@ -145,6 +156,7 @@ class App(object):
         num_args = 0 if args is None else len(args) - num_opts
 
         if len(self.args) != num_args:
+            # DEBUG Should make a BadArgCount exception.
             raise InvalidInput('%s takes %d arguments.' % (self.cmd, num_args))
 
         opt_names = args[num_args:]
@@ -152,6 +164,7 @@ class App(object):
         for key in self.opts:
             # GRIPE Replacing hyphens with underscores should happen only once.
             if key.replace('-', '_') not in opt_names:
+                # DEBUG Should make an InvalidOption exception.
                 raise InvalidInput('%s does not accept the %s option.' %
                                    (self.cmd, key))
 
@@ -178,5 +191,32 @@ class App(object):
             # GRIPE It's sort of ugly to have self.func be populated by
             # self._parse_input(). It's not crystal clear where it comes from.
             return self.func(*self.args, **opts)
+        except UnknownCommand as exc:
+            if exc.value is None:
+                print >> sys.stderr, 'You must enter a command.'
+            else:
+                print >> sys.stderr, '%s is not a known command.' % exc.value
+            print self.get_help()
         except InvalidInput as exc:
             print >> sys.stderr, exc.value
+
+    def get_help(self, cmd=None):
+        """Return help info for `cmd` as a string.
+
+        If `cmd` is None, returns help info for the program.
+
+        DEBUG Help for specific commands is not yet implemented.
+        DEBUG Program help is currently just a list of available commands.
+
+        """
+
+        if cmd is not None:
+            # STUB The cmd help feature is not yet implemented.
+            raise Exception('Help for specific commands is not implemented.')
+
+        cmd_names = ['    ' + cmd_name for cmd_name in self.commands.keys()]
+        cmd_list = '\n'.join(cmd_names)
+
+        help_msg = 'The following commands are available:\n\n' + cmd_list
+
+        return help_msg
