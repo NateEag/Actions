@@ -82,7 +82,7 @@ If it's not worth thinking about, either let it go, or put a note of less than
 twenty words in a reviewbox, so that you'll remember it once it is worth
 dealing with.
 
-If it is worth dealing with:
+If it is worth dealing with::
 
     Decide whether the action stands alone or is part of a project.
 
@@ -96,9 +96,9 @@ If it is worth dealing with:
             If you do, decide whether it's worth tracking the project formally,
             and continue with the triage process based on that.
 
-    Guess how long the action would take.
+    Guess how long the action will take.
 
-    If you can do it faster than you can defer/delegate it, do it.
+    If you can do it faster than you can defer or delegate it, do so.
 
     Otherwise, defer it or delegate it.
 
@@ -146,7 +146,7 @@ information, then to **take the first action that decision requires**.
 Otherwise, your inbox becomes a tangled web of half-forgotten actions,
 reference data, and unread information.
 
-For each item in your inbox, in order:
+For each item in your inbox, in order::
 
     Read through it.
 
@@ -164,7 +164,8 @@ For each item in your inbox, in order:
     If the item is no longer needed, discard it.
 
 Note that a processed item may not go back in an inbox. The inbox is for new
-inputs from other people. If you think you'll need to look at this item again, put it in a reviewbox.
+inputs. If you think you'll need to look at this item again, put it in a
+reviewbox (with annotations).
 
 
 Processing Reviewboxes
@@ -178,20 +179,20 @@ probably be better.
 
 Since you control what goes into the reviewbox, you know how overloaded it is -
 if you toss some things in it through the course of a day, you might want to
-take a few minutes at the end of the day to process those, while they're still
+take a few minutes at the end of the day to process them, while they're still
 semi-fresh in your mind.
 
 A reviewbox can be processed like an inbox, with one exception: it is
 permissible to put items back in the reviewbox unaltered.
 
-This is allowed because reviewboxes exist partly to let things ferment while
-your subconscious figures out what to do with them.
+This is allowed because reviewboxes exist mainly to let things ferment while
+your subconscious decides what to do with them.
 
-That said, keeping a "times reviewed" counter of on any item you put back might
-be a good way to keep yourself honest.
+Keeping a "times reviewed" counter of on any item you put back might be a good
+way to keep yourself honest.
 
-More complex ways to deal with reviewboxes are probably possible, and also
-probably a bad idea.
+More complex ways to deal with reviewboxes are probably possible (and
+probably a bad idea).
 
 
 Project Review
@@ -209,12 +210,11 @@ has:
 
 accompanied by any updates to these files that seem appropriate.
 
-Deferred actions are glanced over just to get an idea of where you stand and
-what you should be doing next, and because it may suggest other actions you're
-currently missing.
+Glance over deferred actions to get an idea of where you stand, what you
+should be doing next, and what actions you may not have realized you needed.
 
-Delegated actions, you may need to pester someone about. You just want to be
-reminded they exist, and to address it if one's gone unresponsive for too long.
+See if you need to follow up on any delegated actions. Mostly you want to be
+reminded they exist, and to catch any that have gone too long.
 
 Reviewboxes you need to be careful with - it's easy to get sucked in if a lot has piled up. Still, occasionally something will click, and you'll be able to turn the review item into actions or a project.
 
@@ -228,7 +228,9 @@ Full Review
 It's a good idea to look over all your current commitments regularly, so you
 know where things stand and what you should be focusing on.
 
-Once a week is probably about the right frequency.
+Once a week is probably about the right frequency. Your mind should be fresh
+and your schedule clear. Try it with your morning beverage of choice on a day
+off.
 
 A full review entails:
 
