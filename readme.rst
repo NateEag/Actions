@@ -76,7 +76,7 @@ The first step in the triage process is to decide whether it's worth thinking
 about this possible action right now. There are two useful tests for this:
 
 1. Will it damage important mental state?
-2. Will it take longer to defer it than to do with it?
+2. Will it take longer to defer it than to do it?
 
 If it's not worth thinking about, either let it go, or put a note of less than
 twenty words in a reviewbox, so that you'll remember it once it is worth
